@@ -1,23 +1,39 @@
 export default class AnswerModel {
     #value: string
-    #correct: boolean
+    #isCorrect: boolean
     #revealed: boolean
 
-    constructor(value: string, correct: boolean, revealed: boolean) {
+    constructor(value: string, isCorrect: boolean, revealed = false) {
         this.#value = value
-        this.#correct = correct
+        this.#isCorrect = isCorrect
         this.#revealed = revealed
+    }
+
+    static correct(value: string) {
+        return new AnswerModel(value, true)
+    }
+
+    static wrong(value: string) {
+        return new AnswerModel(value, false)
     }
 
     get value() {
         return this.#value
     }
 
-    get correct() {
-        return this.#correct
+    get isCorrect() {
+        return this.#isCorrect
     }
 
     get revealed() {
         return this.#revealed
+    }
+
+    parseLiteralObject() {
+        return {
+            value: this.#value,
+            isCorrect: this.#isCorrect,
+            revealed: this.#revealed,
+        }
     }
 }
