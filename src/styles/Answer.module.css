@@ -37,9 +37,9 @@
     background-color: #fff;
 }
 
-/* .back {
+.back {
     transform: rotateY(180deg);
-} */
+}
 
 .back>div {
     display: flex;

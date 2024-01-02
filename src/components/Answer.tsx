@@ -11,34 +11,32 @@ type AnswerProps = {
 
 export default function Answer(props: AnswerProps) {
     const answer = props.value
+    const revealed = answer.revealed ? styles.answerRevealed : ''
 
     return (
         <div className={styles.answer} onClick={() => props.onAnswer(props.index)}>
-            <div className={styles.answerContent}>
-                {!answer.revealed ? (
-                    <div className={styles.front}>
-                        <div className={styles.letter} style={{ backgroundColor: props.letterBg }} >
-                            {props.letter}
-                        </div>
-                        <div className={styles.value}>
-                            {answer.value}
-                        </div>
+            <div className={`${revealed} ${styles.answerContent}`}>
+                <div className={styles.front}>
+                    <div className={styles.letter} style={{ backgroundColor: props.letterBg }} >
+                        {props.letter}
                     </div>
-                ) : (
-                    <div className={styles.back}>
-                        {answer.isCorrect ? (
-                            <div className={styles.correct}>
-                                <div>The correct answer is...</div>
-                                <div className={styles.value}>{answer.value}</div>
-                            </div>
-                        ) : (
-                            <div className={styles.wrong}>
-                                <div>The answer is wrong...</div>
-                                <div className={styles.value}>{answer.value}</div>
-                            </div>
-                        )}
+                    <div className={styles.value}>
+                        {answer.value}
                     </div>
-                )}
+                </div>
+                <div className={styles.back}>
+                    {answer.isCorrect ? (
+                        <div className={styles.correct}>
+                            <div>The correct answer is...</div>
+                            <div className={styles.value}>{answer.value}</div>
+                        </div>
+                    ) : (
+                        <div className={styles.wrong}>
+                            <div>The answer is wrong...</div>
+                            <div className={styles.value}>{answer.value}</div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )
