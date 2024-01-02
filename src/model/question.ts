@@ -57,13 +57,18 @@ export default class QuestionModel {
         return new QuestionModel(this.#id, this.#statement, shuffleAnswers, this.#correctedAnswer)
     }
 
-    parseLiteralObject() {
+    static questionModelFactory(obj: QuestionModel): QuestionModel {
+        const answers = obj?.answers.map(res => AnswerModel.answerModelFactory(res))
+        return new QuestionModel(obj.id, obj.statement, answers, obj.correctedAnswer)
+    }
+
+    questionModelFactory() {
         return {
             id: this.#id,
             statement: this.#statement,
             answered: this.answered,
             correctedAnswer: this.#correctedAnswer,
-            answers: this.#answers.map(answer => answer.parseLiteralObject()),
+            answers: this.#answers.map(answer => answer.answerModelFactory()),
         }
     }
 }

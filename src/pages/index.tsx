@@ -1,40 +1,78 @@
-import { useState } from 'react'
-import AnswerModel from '@/model/answer'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import QuestionModel from '@/model/question'
 import Questionnaire from '@/components/Questionnaire'
 
-const questionMock = new QuestionModel(20, 'Best color?', [
-  AnswerModel.wrong('Green'),
-  AnswerModel.wrong('Blue'),
-  AnswerModel.wrong('Red'),
-  AnswerModel.correct('Black')
-])
+const BASE_URL = 'http://localhost:3000/api'
 
 export default function Home() {
-  const [question, setQuestion] = useState(questionMock)
+  const router = useRouter()
 
-  const handleAnswered = (question: QuestionModel) => {
+  const [questionsId, setQuestionsId] = useState<number[]>([])
+  const [question, setQuestion] = useState<QuestionModel>()
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0)
 
+  const getQuestionsId = async () => {
+    const res = await fetch(`${BASE_URL}/questionnaire`)
+    const questionsId = await res.json()
+    setQuestionsId(questionsId)
+  }
+
+  const getQuestion = async (questionId: number) => {
+    const res = await fetch(`${BASE_URL}/questions/${questionId}`)
+    const json = await res.json()
+    const newQuestion = QuestionModel.questionModelFactory(json)
+    setQuestion(newQuestion)
+  }
+
+  const handleAnswered = (answeredQuestion: QuestionModel) => {
+    setQuestion(answeredQuestion)
+    const isCorrectedAnswer = answeredQuestion.correctedAnswer
+    setCorrectAnswers((prevState => prevState + (isCorrectedAnswer ? 1 : 0)))
+  }
+
+  const getNextQuestionId = () => {
+    if (question) {
+      const nextIndex = questionsId.indexOf(question.id) + 1
+      return questionsId[nextIndex]
+    }
   }
 
   const handleGoNext = () => {
-
+    const nextQuestionId = getNextQuestionId()
+    nextQuestionId ? goToNextQuestion(nextQuestionId) : finishGame()
   }
 
-  return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh'
-    }}>
-      <Questionnaire
-        question={question}
-        finished={true}
-        answered={handleAnswered}
-        goNext={handleGoNext}
-      />
-    </div>
+  const goToNextQuestion = (nextQuestionId: number) => {
+    getQuestion(nextQuestionId)
+  }
+
+  const finishGame = () => {
+    router.push({
+      pathname: '/result',
+      query: {
+        total: questionsId.length,
+        correctAnswers: correctAnswers
+      }
+    })
+  }
+
+  useEffect(() => {
+    getQuestionsId()
+  }, [])
+
+  useEffect(() => {
+    if (questionsId.length > 0) {
+      getQuestion(questionsId[0])
+    }
+  }, [questionsId])
+
+  return question && (
+    <Questionnaire
+      question={question}
+      finished={getNextQuestionId() === undefined}
+      answered={handleAnswered}
+      goNext={handleGoNext}
+    />
   )
 }

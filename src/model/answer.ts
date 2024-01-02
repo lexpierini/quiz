@@ -33,7 +33,11 @@ export default class AnswerModel {
         return new AnswerModel(this.#value, this.#isCorrect, true)
     }
 
-    parseLiteralObject() {
+    static answerModelFactory(obj: AnswerModel): AnswerModel {
+        return new AnswerModel(obj?.value, obj?.isCorrect, obj?.revealed)
+    }
+
+    answerModelFactory() {
         return {
             value: this.#value,
             isCorrect: this.#isCorrect,

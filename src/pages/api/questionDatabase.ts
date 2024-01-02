@@ -38,29 +38,23 @@ const answers: QuestionModel[] = [
         AnswerModel.wrong('Leaves'),
         AnswerModel.correct('Nectar'),
     ]),
-    new QuestionModel(6, 'Who is the king of the gods in Greek mythology?', [
+    new QuestionModel(7, 'Who is the king of the gods in Greek mythology?', [
         AnswerModel.wrong('Poseidon'),
         AnswerModel.wrong('Ares'),
         AnswerModel.wrong('Apollo'),
         AnswerModel.correct('Zeus'),
     ]),
-    new QuestionModel(7, 'What is the only planet that rotates on its side?', [
+    new QuestionModel(8, 'What is the only planet that rotates on its side?', [
         AnswerModel.wrong('Neptune'),
         AnswerModel.wrong('Saturn'),
         AnswerModel.wrong('Jupiter'),
         AnswerModel.correct('Uranus'),
     ]),
-    new QuestionModel(8, 'What is the official animal of Scotland?', [
+    new QuestionModel(9, 'What is the official animal of Scotland?', [
         AnswerModel.wrong('Sheep'),
         AnswerModel.wrong('Horse'),
         AnswerModel.wrong('Loch Ness'),
         AnswerModel.correct('Unicorn'),
-    ]),
-    new QuestionModel(9, 'What animal’s milk is pink?', [
-        AnswerModel.wrong('Flamingo'),
-        AnswerModel.wrong('River Dolphin'),
-        AnswerModel.wrong('Pig'),
-        AnswerModel.correct('Hippopotamus'),
     ]),
     new QuestionModel(10, 'In what year did the Berlin Wall fall?', [
         AnswerModel.wrong('1969'),
@@ -103,6 +97,12 @@ const answers: QuestionModel[] = [
         AnswerModel.wrong('Eight'),
         AnswerModel.wrong('Ten'),
         AnswerModel.correct('Seven'),
+    ]),
+    new QuestionModel(17, 'What animal\'s milk is pink?', [
+        AnswerModel.wrong('Flamingo'),
+        AnswerModel.wrong('River Dolphin'),
+        AnswerModel.wrong('Pig'),
+        AnswerModel.correct('Hippopotamus'),
     ]),
 ]
 
