@@ -17,6 +17,12 @@ export default function Home() {
     setQuestion(question.replyWith(index))
   }
 
+  const handleTimeOut = () => {
+    if (question.notAnswered) {
+      setQuestion(question.replyWith(-1))
+    }
+  }
+
   return (
     <div style={{
       display: 'flex',
@@ -24,7 +30,7 @@ export default function Home() {
       alignItems: 'center',
       height: '100vh'
     }}>
-      <Question value={question} onAnswer={handleOnAnswer} />
+      <Question value={question} answerDuration={15} onAnswer={handleOnAnswer} timeOut={handleTimeOut} />
     </div>
   )
 }
