@@ -1,5 +1,6 @@
-import QuestionModel from "@/model/question"
 import styles from '../styles/Question.module.css'
+import QuestionModel from "@/model/question"
+import Statement from "./Statement"
 
 type QuestionProps = {
     value: QuestionModel
@@ -10,7 +11,7 @@ export default function Question(props: QuestionProps) {
 
     return (
         <div className={styles.question}>
-            <h1>Question</h1>
+            <Statement text={question.statement} />
         </div>
     )
 }
