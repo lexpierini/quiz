@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import Question from '@/components/Question'
 import AnswerModel from '@/model/answer'
 import QuestionModel from '@/model/question'
-import Button from '@/components/Button'
+import Questionnaire from '@/components/Questionnaire'
 
 const questionMock = new QuestionModel(20, 'Best color?', [
   AnswerModel.wrong('Green'),
@@ -14,14 +13,12 @@ const questionMock = new QuestionModel(20, 'Best color?', [
 export default function Home() {
   const [question, setQuestion] = useState(questionMock)
 
-  const handleOnAnswer = (index: number) => {
-    setQuestion(question.replyWith(index))
+  const handleAnswered = (question: QuestionModel) => {
+
   }
 
-  const handleTimeOut = () => {
-    if (question.notAnswered) {
-      setQuestion(question.replyWith(-1))
-    }
+  const handleGoNext = () => {
+
   }
 
   return (
@@ -32,8 +29,12 @@ export default function Home() {
       alignItems: 'center',
       height: '100vh'
     }}>
-      <Question value={question} answerDuration={15} onAnswer={handleOnAnswer} timeOut={handleTimeOut} />
-      <Button text='Next' href='/result' />
+      <Questionnaire
+        question={question}
+        finished={true}
+        answered={handleAnswered}
+        goNext={handleGoNext}
+      />
     </div>
   )
 }
