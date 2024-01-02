@@ -29,6 +29,10 @@ export default class AnswerModel {
         return this.#revealed
     }
 
+    reveal() {
+        return new AnswerModel(this.#value, this.#isCorrect, true)
+    }
+
     parseLiteralObject() {
         return {
             value: this.#value,
