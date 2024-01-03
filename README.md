@@ -7,9 +7,10 @@ Study project with Next.js
 - React.js
 - Typescript
 
-## User interface
+## Link to access the app
+[https://quiz-lexpierini.vercel.app](https://quiz-lexpierini.vercel.app)
 
-[Click here to access the application in production mode](https://quiz-lexpierini.vercel.app)
+## Images
 
 ![Home](/src/assets/imgs/start_game.png)
 
