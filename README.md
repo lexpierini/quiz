@@ -9,6 +9,8 @@ Study project with Next.js
 
 ## User interface
 
+[Click here to access the application in production mode](https://quiz-lexpierini.vercel.app)
+
 ![Home](/src/assets/imgs/start_game.png)
 
 ![Correct Answer](/src/assets/imgs/correct_answer.png)
